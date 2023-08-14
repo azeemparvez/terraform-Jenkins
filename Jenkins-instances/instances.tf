@@ -9,7 +9,7 @@ data "aws_ami" "rhel" {
   */
 }
 
-resource "aws_instance" "Jenkins" {
+resource "aws_instance" "jenkins" {
     ami = data.aws_ami.rhel.id 
     instance_type = var.instance_type
     subnet_id = var.subnet_id
