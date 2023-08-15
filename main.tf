@@ -39,4 +39,26 @@ module "jenkins-slaves" {
   key_name      = "azeem"
 }
 
-
+resource "null_resource" "local" {
+  provisioner "local-exec" {
+   interpreter = ["/bin/bash" ,"-c"]
+   command = <<-EOT
+    cd ansible
+    echo "[${module.jenkins-instance.name_instance}]" > ./${module.jenkins-instance.name_instance}.txt
+    echo ${module.jenkins-instance.public_ip} >> ./${module.jenkins-instance.name_instance}.txt
+    ansible-playbook -i ./${module.jenkins-instance.name_instance}.txt ./jenkins.yaml
+   EOT
+  }
+}
+/*
+resource "null_resource" "local-destroy" {
+  provisioner "local-exec" {
+   when = destroy
+   depends
+   interpreter = ["/bin/bash" ,"-c"]
+   command = <<-EOT
+    rm -rf ./ansible/${module.jenkins-instance.name_instance}
+   EOT
+  }
+}
+*/
