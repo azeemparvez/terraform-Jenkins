@@ -28,3 +28,10 @@ variable "instance_name" {
   description = "Instance Name"
   
 }
+
+variable "ansiblefile" {
+  default = ""
+  type = string
+  description = "File for ansible automation"
+  
+}

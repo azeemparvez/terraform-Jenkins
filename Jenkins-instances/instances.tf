@@ -19,5 +19,8 @@ resource "aws_instance" "jenkins" {
     tags = {
       Name = "${var.instance_name}"
     }
+    provisioner "local-exec" {
+      command = "aws ec2 wait instance-status-ok --instance-ids ${aws_instance.jenkins.id}"
+    }
 }
 
