@@ -10,6 +10,12 @@
    description = "ingress from port"
  }
 
+  variable "ingress_to_port" {
+   default = ""
+   type = string
+   description = "ingress to port"
+ }
+
  variable "vpc_id" {
    default = ""
    type = string
@@ -17,8 +23,8 @@
  }
 
 variable "ingress_cidr_blocks" {
-    default = ""
-    type = string
+    default = [""]
+    type = list(string)
     description = "ingress CIDR"
   
 }

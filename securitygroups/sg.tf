@@ -1,6 +1,6 @@
 resource "aws_security_group" "sg1" {
   name        = var.sg_name
-  description = "Allow ${var.sg-name} inbound traffic"
+  description = "Allow ${var.sg_name} inbound traffic"
   vpc_id      = var.vpc_id
 
   ingress {
