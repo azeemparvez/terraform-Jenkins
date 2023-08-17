@@ -47,6 +47,7 @@ resource "null_resource" "local" {
     echo "[${module.jenkins-instance.name_instance}]" > ./${module.jenkins-instance.name_instance}.txt
     echo ${module.jenkins-instance.public_ip} >> ./${module.jenkins-instance.name_instance}.txt
     ansible-playbook -i ./${module.jenkins-instance.name_instance}.txt ./jenkins.yaml
+    ssh ec2-user@${module.jenkins-instance.public_ip} sudo cat /var/lib/jenkins/secrets/initialAdminPassword > ../initialpassword.txt
    EOT
   }
 }
