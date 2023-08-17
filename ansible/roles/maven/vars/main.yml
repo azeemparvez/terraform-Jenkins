@@ -18,7 +18,7 @@ MVN_PATH: "/opt/maven4"
 
 # this is the location where mvn files to be downloaded for extraction
 
-MVN_DDEST: "/home/opc"
+MVN_DDEST: "/home/ec2-user"
 
 #this is the path for MAVEN downloaded location on local users home dir
 

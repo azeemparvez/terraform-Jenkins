@@ -38,7 +38,7 @@
 - name: remove the archive file "{{MVN_DDEST}}"
   file:
           path: "{{MVN_DDEST}}/apache-maven-{{MVN_MINOR}}-bin.zip"
-          remote_src: true
+          #remote_src: true
           state: absent
 
 - name:  copy files to profiled to make the path active 
