@@ -1,3 +1,3 @@
 output "jenkins" {
-    value = "${module.jenkins-instance}"
+  value = module.jenkins-instance
 }
