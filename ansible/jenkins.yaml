@@ -1,0 +1,39 @@
+---
+- name: Install configure Jenkins
+  hosts: all
+  roles:
+    - roles/maven
+  tasks:
+     - name: Install Wget
+       yum:
+         name: wget
+         state: latest
+     - name: Download and Configure Jenkins repos
+       get_url:
+         url: https://pkg.jenkins.io/redhat-stable/jenkins.repo
+         dest: /etc/yum.repos.d/jenkins.repo
+     - name: Run to command to install gpg key
+       command: "rpm --import https://pkg.jenkins.io/redhat-stable/jenkins.io-2023.key"
+       run_once: true
+     - name: Update the packages
+       yum:
+         name: "*"
+         state: latest
+         exclude:
+          - kernel*
+     - name: Install OpenJDK and Jenkins
+       yum:
+         name: "{{ item }}"
+         state: present
+       with_list:
+         - java-17-openjdk
+         - jenkins
+     - name: enable and start the Jenkins Service
+       service:
+        name: jenkins
+        state: started
+        enabled: true
+        
+
+
+       

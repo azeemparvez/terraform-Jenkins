@@ -1,0 +1,25 @@
+---
+# JAVA variables
+jdk: java-11-openjdk-11.0.18.0.10-2.el8_7.x86_64
+
+# JAVA HOME PATH on profile.d
+JAVA_PATH: "/etc/profile.d/java.sh"
+
+# this variable is for Maven Major Version
+MVN_MAJOR: maven-4
+
+# this variable is for maven minor release details
+
+MVN_MINOR: 4.0.0-alpha-5
+
+#this is the path where maven files to be copied
+
+MVN_PATH: "/opt/maven4"
+
+# this is the location where mvn files to be downloaded for extraction
+
+MVN_DDEST: "/home/ec2-user"
+
+#this is the path for MAVEN downloaded location on local users home dir
+
+PATH: "{{MVN_DDEST}}/apache-maven-{{MVN_MINOR}}"

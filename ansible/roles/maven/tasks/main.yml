@@ -1,0 +1,52 @@
+---
+- name: Install git and JAVA JDK
+  yum:
+          name: "{{item}}"
+          state: present 
+  loop:
+          - "{{jdk}}"
+          - git
+
+- name: set JAVA_HOME for jdk installed
+  template:
+          src: java.sh.j2
+          dest: "{{JAVA_PATH}}"
+  
+
+- name: download the package from maven website
+  get_url:
+          url: "https://dlcdn.apache.org/maven/{{MVN_MAJOR}}/{{MVN_MINOR}}/binaries/apache-maven-{{MVN_MINOR}}-bin.zip"
+          dest: "{{MVN_DDEST}}"
+
+- name: create a directory in opt file
+  file:
+          path: "{{MVN_PATH}}"
+          state: directory
+          mode: 755
+
+- name: install unzip 
+  package:
+          name: unzip
+          state: present
+
+- name: move maven files to path
+  unarchive:
+          src: "{{MVN_DDEST}}/apache-maven-{{MVN_MINOR}}-bin.zip"
+          remote_src: true
+          dest: "{{MVN_PATH}}"
+
+- name: remove the archive file "{{MVN_DDEST}}"
+  file:
+          path: "{{MVN_DDEST}}/apache-maven-{{MVN_MINOR}}-bin.zip"
+          #remote_src: true
+          state: absent
+
+- name:  copy files to profiled to make the path active 
+  template:
+          src: mvn.sh.j2
+          dest: "/etc/profile.d/mvn.sh"
+          
+
+
+
+

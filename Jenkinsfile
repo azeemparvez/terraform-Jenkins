@@ -3,6 +3,7 @@ pipeline {
     stages {
         stage(checkout) {
             steps{
+<<<<<<< HEAD
                 git branch: 'main', credentialsId: 'github', url: 'https://github.com/azeemparvez/terraform-Jenkins.git'
             }
         }
